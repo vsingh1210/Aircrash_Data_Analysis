@@ -1,0 +1,9 @@
+nytdata<-read.csv("nyt1.csv")
+ageCat<-cut(nytdata$Age,c(0,18,24,34,44,54,64,Inf))
+library(ggplot2)
+ggplot(nytdata,aes(x=Impressions,fill=ageCat))+ geom_histogram(binwidth=1)
+ggplot(nytdata,aes(x=Clicks,fill=ageCat))+ geom_histogram(binwidth=1)
+clickCat<-cut(nytdata$Click,c(unique(nytdata$Clicks)))
+clickCat2<-cut(subset(nytdata,nytdata$Age>18)$Clicks,c(unique(nytdata$Clicks)))
+ggplot(subset(nytdata,nytdata$Age>18),aes(x=Gender,fill=clickCat2))+ geom_histogram(binwidth=1)
+
